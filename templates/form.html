@@ -1,5 +1,69 @@
 {% extends 'index.html' %}
 
 {% block form %}
+<form action="/product" method="post">
+    <table>
+        <tr>
+            <td><label for="customer-name">客戶名稱</label></td>
+            <td><input type="text" id="customer-name" name="customer-name" required></td>
+        </tr>
+        <tr>
+            <td><label for="product-note">備註</label></td>
+            <td><input type="text" id="product-note" name="product-note"></td>
+        </tr>
+        <tr>
+            <td><label for="product-date">日期</label></td>
+            <td><input type="date" id="product-date" name="product-date" required></td>
+        </tr>
+        <tr>
+            <td><label for="product-amount">數量</label></td>
+            <td><input type="number" id="product-amount" name="product-amount" min="1" value="1" onchange="countTotal()" required></td>
+        </tr>
+        <tr>
+            <td><label for="product-status">狀態</label></td>
+            <td>
+                <select id="product-status" name="product-status">
+                    <option value="未付款" selected>未付款</option>
+                    <option value="已付款">已付款</option>
+                    <option value="已完成">已完成</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="category">商品種類</label></td>
+            <td>
+                <select id="category" name="category" onchange="selectCategory()" required>
+                    <option value="" disabled selected>請選擇種類</option>
+                    <option value="主食">主食</option>
+                    <option value="飲料">飲料</option>
+                    <option value="點心">點心</option>
+                    <option value="輕食">輕食</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="product-name">商品名稱</label></td>
+            <td>
+                <select id="product-name" name="product-name" onchange="selectProduct()" required>
+                    <option value="" disabled selected>請先選擇種類</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="product-price">單價</label></td>
+            <td><input type="text" id="product-price" name="product-price" readonly></td>
+        </tr>
+        <tr>
+            <td><label for="product-total">小計</label></td>
+            <td><input type="text" id="product-total" name="product-total" readonly></td>
+        </tr>
+    </table>
+    <br>
+    <button type="submit">送出</button>
+</form>
 
+<script>
+    // Set default date to today
+    document.getElementById('product-date').valueAsDate = new Date();
+</script>
 {% endblock%}
